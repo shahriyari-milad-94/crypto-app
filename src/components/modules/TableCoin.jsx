@@ -50,19 +50,19 @@ const TableRow = ({
       <td>
         <div className={styles.symbol}>
           <img src={image} alt="" />
-          <span>{symbol.toUpperCase()}</span>
+          <span>{symbol?.toUpperCase()}</span>
         </div>
       </td>
       <td>{name}</td>
-      <td>${current_price.toLocaleString()}</td>
+      <td>${current_price.toLocaleString() ?? '-'}</td>
       <td
         className={
           price_change_percentage_24h > 0 ? styles.success : styles.error
         }
       >
-        {price_change_percentage_24h?.toFixed(2)}%
+        {price_change_percentage_24h?.toFixed(2) ?? '-'}%
       </td>
-      <td>{total_volume.toLocaleString()}</td>
+      <td>{total_volume.toLocaleString() ?? '-'}</td>
       <td>
         <img
           src={price_change_percentage_24h > 0 ? chartUp : chartDown}
