@@ -13,7 +13,11 @@ console.log(convertData(chart,type));
       <span className={styles.cross} onClick={() => setChart(null)}>
         X
       </span>
-      <div className={styles.chart}></div>
+      <div className={styles.chart}>
+        <div className={styles.graph} >
+            
+        </div>
+      </div>
     </div>
   );
 }
