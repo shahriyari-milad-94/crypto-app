@@ -22,7 +22,7 @@ function Search({ currency, setCurrency }) {
           signal: controller.signal,
         });
         const json = await res.json();
-        console.log(json);
+  
         if (json.coins) {
           setIsLoading(false);
           setCoins(json.coins);

@@ -46,8 +46,8 @@ function TableCoin({ coins, isLoading, currency, setChart }) {
 
 export default TableCoin;
 
-const TableRow = ({
-  coin: {
+const TableRow = ({ coin, setChart, currencySymbol }) => {
+  const {
     id,
     name,
     image,
@@ -55,18 +55,16 @@ const TableRow = ({
     current_price,
     price_change_percentage_24h,
     total_volume,
-  },
-  currencySymbol,
-  setChart,
-}) => {
+  } = coin;
+
   const showHandler = async () => {
     try {
       const res = await fetch(marketChart(id));
       const json = await res.json();
-      console.log(json);
-      setChart(json);
+
+      setChart({ ...json, coin });
     } catch (error) {
-      setChart(null)
+      setChart(null);
     }
   };
 
@@ -78,11 +76,14 @@ const TableRow = ({
           <span>{symbol?.toUpperCase()}</span>
         </div>
       </td>
+
       <td>{name}</td>
+
       <td>
         {currencySymbol}
-        {current_price.toLocaleString() ?? "-"}
+        {current_price?.toLocaleString() ?? "-"}
       </td>
+
       <td
         className={
           price_change_percentage_24h > 0 ? styles.success : styles.error
@@ -90,7 +91,9 @@ const TableRow = ({
       >
         {price_change_percentage_24h?.toFixed(2) ?? "-"}%
       </td>
-      <td>{total_volume.toLocaleString() ?? "-"}</td>
+
+      <td>{total_volume?.toLocaleString() ?? "-"}</td>
+
       <td>
         <img
           src={price_change_percentage_24h > 0 ? chartUp : chartDown}
